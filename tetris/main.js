@@ -110,13 +110,14 @@ document.addEventListener('keydown', event => {
         piece.position.y++
         if(checkCollision()) {
             piece.position.y--
+            solidifyPiece()
         }
     }
 })
 
 // To check the collision
-function checkCollision(){
-    return piece.shape.find((row, y) =>{
+function checkCollision() {
+    return piece.shape.find((row, y) => {
         return row.find((value, x) => {
             return (
                 value !== 0 &&
@@ -125,6 +126,24 @@ function checkCollision(){
         })
     })
 }
+
+// After reaching the end of the board, a piece became part of the board
+function solidifyPiece() {
+    piece.shape.forEach((row, x) => {
+        row.forEach((value, y) => {
+            if(value === 1) {
+                board[y + piece.position.y][x + piece.position.x] = 1
+            }
+        })
+
+    })
+
+    // Reset the piece's position
+    piece.position.x = 0
+    piece.position.y = 0
+}
+
+
 
 update()
 
