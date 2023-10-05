@@ -60,10 +60,23 @@ const piece = {
 }
 
 // 2 - Game Loop
-function update() {
+// 8 - Autodrop
+let dropCounter = 0
+let lastTime = 0
+function update(time = 0) {
+    const deltaTime = time - lastTime
+    lastTime = time
+
+    dropCounter += deltaTime
+    if (dropCounter > 1000) {
+        piece.position.y++
+        dropCounter = 0
+    }
+
     draw()
     window.requestAnimationFrame(update) // Loop - alternative: The setInterval() method
 }
+
 
 function draw() {
     context.fillStyle = "#000" // Background - black
