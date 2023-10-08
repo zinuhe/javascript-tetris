@@ -59,6 +59,39 @@ const piece = {
     ]
 }
 
+// 9 - Random pieces
+const PIECES = [
+    [
+        [1, 1], // Square | Smashboy
+        [1, 1]
+    ],
+    [
+        [1, 1, 1, 1] // Hero
+    ],
+    [
+        [0, 1, 0], // Teewee
+        [1, 1, 1]
+    ],
+    [
+        [1, 1, 0], // Cleveland Z
+        [0, 1, 1]
+    ],
+    [
+        [0, 1, 1], // Rhode Island Z
+        [1, 1, 0]
+    ],
+    [
+        [1, 0], // Orange Ricky
+        [1, 0],
+        [1, 1]
+    ],
+    [
+        [0, 1], // Blue Ricky
+        [0, 1],
+        [1, 1]
+    ]
+]
+
 // 2 - Game Loop
 // 8 - Autodrop
 let dropCounter = 0
@@ -143,14 +176,17 @@ function checkCollision() {
 
 // After reaching the end of the board, a piece became part of the board
 function solidifyPiece() {
-    piece.shape.forEach((row, x) => {
-        row.forEach((value, y) => {
+    piece.shape.forEach((row, y) => {
+        row.forEach((value, x) => {
             if(value === 1) {
                 board[y + piece.position.y][x + piece.position.x] = 1
             }
         })
 
     })
+
+    // get random piece
+    piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)]
 
     // Reset the piece's position
     piece.position.x = 0
