@@ -4,9 +4,13 @@ import './style.css'
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
+const $score = document.querySelector('span')
 const BLOCK_SIZE = 20;
 const BOARD_WIDTH = 14
 const BOARD_HEIGHT = 30
+
+// Score
+let score = 0;
 
 // Tetris board dimensions
 canvas.width = BLOCK_SIZE * BOARD_WIDTH
@@ -134,6 +138,9 @@ function draw() {
             }
         })
     })
+
+    // Update the score
+    $score.innerText = score
 }
 
 // Movement of the pieces
@@ -231,7 +238,8 @@ function removeRows() {
     rowsToRemove.forEach(y => {
         board.splice(y, 1)
         const newRow = Array(BOARD_WIDTH).fill(0)
-        board.unshift(newRow)
+        board.unshift(newRow) // removed las line
+        score += 10;
     })
 }
 
