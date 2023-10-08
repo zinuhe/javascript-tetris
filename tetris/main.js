@@ -185,12 +185,18 @@ function solidifyPiece() {
 
     })
 
+    // Reset the piece's position
+    piece.position.x = Math.floor(BOARD_WIDTH / 2) // Initial position new pieces in board
+    piece.position.y = 0
+
     // get random piece
     piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)]
 
-    // Reset the piece's position
-    piece.position.x = 0
-    piece.position.y = 0
+    // Game over
+    if(checkCollision()) {
+        window.alert('Game Over')
+        board.forEach((row) => row.fill(0))
+    }
 }
 
 // removes the solidified lines at the button
