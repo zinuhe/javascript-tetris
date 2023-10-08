@@ -136,7 +136,7 @@ function draw() {
     })
 }
 
-// Move the piece
+// Movement of the pieces
 document.addEventListener('keydown', event => {
     if(event.key === 'ArrowLeft') {
         piece.position.x--  // move the piece
@@ -158,6 +158,25 @@ document.addEventListener('keydown', event => {
             piece.position.y--
             solidifyPiece()
             removeRows()
+        }
+    }
+
+    if (event.key === 'ArrowUp') {
+        const rotated = []
+
+        for (let i = 0; i < piece.shape[0].length; i++) {
+            const row = []
+            for (let j = piece.shape.length - 1; j >= 0; j--) {
+                row.push(piece.shape[j][i])
+            }
+            rotated.push(row)
+        }
+
+        // Avoid rotating on the edges if the piece doesn't fit
+        const previousShape = piece.shape
+        piece.shape = rotated
+        if (checkCollision()) {
+            piece.shape = previousShape
         }
     }
 })
