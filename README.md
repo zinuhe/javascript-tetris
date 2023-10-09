@@ -3,7 +3,7 @@
 ## Create
 
 ```shell
-npm create vite@latest
+npm create vite@latest tetris
 ```
 
 ## Install dependencies
@@ -12,24 +12,35 @@ npm create vite@latest
 pnpm install
 ```
 
-## Instal linter
+# To Run
+
+```shell
+pnpm run dev
+```
+
+## Linter
+
+### Install
 
 ```shell
 pnpm install standard -D
 ```
 
-## Config linter
+### Config
 
 [Documentation](https://eslint.org/docs/latest/use/configure/)
 
-On **`package.json`** add at the end
+On **`package.json`** add at the end:
 
 ```javascript
 "eslintConfig": {
-    "extends":[
-        "standard"
-    ]
+  "extends":[
+      "standard"
+  ],
+  "rules": {
+    "space-before-function-paren": ["error", "never"]
   }
+}
 ```
 
 ## Canvas
@@ -39,9 +50,3 @@ Add a canvas to draw on it
 # To Know
 
 - const context = canvas.getContext('2d');
-
-# To RUN
-
-```shell
-pnpm run dev
-```
